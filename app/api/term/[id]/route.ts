@@ -9,6 +9,8 @@ function byLang<T extends Record<LanguageCode, string>>(
   return field[lang] ?? field.en;
 }
 
+const backendBaseUrl = () =>  process.env.BACKEND_URL ?? process.env.TAX_API_BASE_URL;
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -16,18 +18,72 @@ export async function GET(
   const { id } = await params;
   const lang = (request.nextUrl.searchParams.get("lang") ?? "en") as LanguageCode;
 
-  const baseUrl = process.env.TAX_API_BASE_URL;
+  const baseUrl = backendBaseUrl();
   if (baseUrl) {
     try {
-      const res = await fetch(
-        `${baseUrl}/term/${encodeURIComponent(id)}?lang=${lang}`,
+      const translationRes = await fetch(
+        `${baseUrl}/crahelper/getTermTranslation?termId=${encodeURIComponent(id)}&lang=${encodeURIComponent(lang)}`,
         { cache: "no-store" }
       );
-      if (!res.ok) throw new Error("Definition fetch failed");
-      const data = await res.json();
-      return NextResponse.json(data);
+      if (!translationRes.ok) {
+        const errBody = (await translationRes.json().catch(() => ({}))) as { error?: string };
+        const message = errBody?.error ?? "Term not found";
+        const isTranslationNotFoundForLanguage =
+          translationRes.status === 404 &&
+          (message.includes("translation not found for language") ||
+            message === "translation not found");
+        return NextResponse.json(
+          isTranslationNotFoundForLanguage
+            ? { error: message, code: "TRANSLATION_NOT_FOUND_FOR_LANGUAGE", language: lang }
+            : { error: message },
+          { status: translationRes.status }
+        );
+      }
+      const translationData = (await translationRes.json()) as {
+        termId: number;
+        language: string;
+        translation: string | { term: string; description?: string };
+      };
+
+      const term =
+        typeof translationData.translation === "string"
+          ? translationData.translation
+          : translationData.translation.term;
+      let definition: string =
+        typeof translationData.translation === "string"
+          ? ""
+          : translationData.translation.description ?? translationData.translation.term;
+
+      if (lang === "en" && !definition) {
+        const metaRes = await fetch(
+          `${baseUrl}/crahelper/getAllEnglishTermsAndMetadata`,
+          { cache: "no-store" }
+        );
+        if (metaRes.ok) {
+          const meta = (await metaRes.json()) as Array<{
+            termId: number;
+            english: string;
+            description: string;
+          }>;
+          const found = meta.find((m) => m.termId === translationData.termId);
+          if (found) definition = found.description;
+        }
+        if (!definition) definition = term;
+      }
+
+      const fallback = definition || term;
+      const payload = {
+        id: String(translationData.termId),
+        term,
+        definition: definition || term,
+        plainLanguage: fallback,
+        whyItMatters: fallback,
+        example: fallback,
+        actionTip: fallback,
+      };
+      return NextResponse.json(payload);
     } catch (err) {
-      console.error("Tax API term error:", err);
+      console.error("Backend term error:", err);
       return NextResponse.json(
         { error: "Could not load definition" },
         { status: 502 }

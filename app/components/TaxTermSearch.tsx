@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import type { LanguageCode } from "@/lib/types";
 import type { TaxTerm, TermDefinition } from "@/lib/types";
+import { LanguageNotFound } from "./LanguageNotFound";
 
 function BookIcon() {
   return (
@@ -26,7 +27,7 @@ function CheckIcon() {
   );
 }
 
-const SECTION_LABELS: Record<LanguageCode, Record<string, string>> = {
+const SECTION_LABELS: Record<string, Record<string, string>> = {
   en: {
     alsoKnownAs: "Also known as",
     plainLanguage: "IN PLAIN LANGUAGE",
@@ -48,7 +49,25 @@ const SECTION_LABELS: Record<LanguageCode, Record<string, string>> = {
     example: "EXEMPLO",
     actionTip: "DICA DE AÇÃO",
   },
+  fr: {
+    alsoKnownAs: "Aussi connu sous le nom de",
+    plainLanguage: "EN LANGAGE SIMPLE",
+    whyItMatters: "POURQUOI C'EST IMPORTANT ?",
+    example: "EXEMPLE",
+    actionTip: "CONSEIL D'ACTION",
+  },
+  "pt-br": {
+    alsoKnownAs: "Também conhecido como",
+    plainLanguage: "EM LINGUAGEM SIMPLES",
+    whyItMatters: "POR QUE ISSO IMPORTA?",
+    example: "EXEMPLO",
+    actionTip: "DICA DE AÇÃO",
+  },
 };
+
+function getSectionLabels(lang: string): Record<string, string> {
+  return SECTION_LABELS[lang] ?? SECTION_LABELS.en;
+}
 
 interface TaxTermSearchProps {
   language: LanguageCode;
@@ -71,6 +90,7 @@ export function TaxTermSearch({ language }: TaxTermSearchProps) {
   const [selectedDefinition, setSelectedDefinition] = useState<TermDefinition | null>(null);
   const [definitionLoading, setDefinitionLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [translationNotFoundForLanguage, setTranslationNotFoundForLanguage] = useState<string | null>(null);
 
   const debouncedQuery = useDebounce(query, 300);
 
@@ -111,11 +131,23 @@ export function TaxTermSearch({ language }: TaxTermSearchProps) {
     setDefinitionLoading(true);
     setSelectedDefinition(null);
     setError(null);
+    setTranslationNotFoundForLanguage(null);
     try {
       const res = await fetch(`/api/term/${encodeURIComponent(id)}?lang=${lang}`);
-      if (!res.ok) throw new Error("Failed to load definition");
-      const data = await res.json();
-      setSelectedDefinition(data);
+      const data = (await res.json().catch(() => ({}))) as {
+        error?: string;
+        code?: string;
+        language?: string;
+      };
+      if (!res.ok) {
+        if (res.status === 404 && data.code === "TRANSLATION_NOT_FOUND_FOR_LANGUAGE") {
+          setTranslationNotFoundForLanguage(data.language ?? lang);
+        } else {
+          setError("Could not load definition.");
+        }
+      } else {
+        setSelectedDefinition(data as TermDefinition);
+      }
     } catch (e) {
       setError("Could not load definition.");
     } finally {
@@ -189,7 +221,7 @@ export function TaxTermSearch({ language }: TaxTermSearchProps) {
             <div className="bg-zinc-800 px-5 py-5 dark:bg-zinc-900">
               {selectedDefinition.alsoKnownAs && (
                 <p className="mb-1 text-xs font-medium uppercase tracking-wide text-zinc-400">
-                  {SECTION_LABELS[language].alsoKnownAs}: {selectedDefinition.alsoKnownAs}
+                  {getSectionLabels(language).alsoKnownAs}: {selectedDefinition.alsoKnownAs}
                 </p>
               )}
               <h2 className="text-2xl font-bold text-white">
@@ -209,7 +241,7 @@ export function TaxTermSearch({ language }: TaxTermSearchProps) {
                     <BookIcon />
                   </span>
                   <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
-                    {SECTION_LABELS[language].plainLanguage}
+                    {getSectionLabels(language).plainLanguage}
                   </h3>
                 </div>
                 <p className="leading-relaxed text-zinc-700 dark:text-zinc-300">
@@ -224,7 +256,7 @@ export function TaxTermSearch({ language }: TaxTermSearchProps) {
                     <InfoIcon />
                   </span>
                   <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-                    {SECTION_LABELS[language].whyItMatters}
+                    {getSectionLabels(language).whyItMatters}
                   </h3>
                 </div>
                 <p className="leading-relaxed text-zinc-700 dark:text-zinc-300">
@@ -235,7 +267,7 @@ export function TaxTermSearch({ language }: TaxTermSearchProps) {
               {/* Example */}
               <div className="border-b border-zinc-200 px-5 py-4 dark:border-zinc-800">
                 <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
-                  {SECTION_LABELS[language].example}
+                  {getSectionLabels(language).example}
                 </h3>
                 <p className="italic leading-relaxed text-zinc-600 dark:text-zinc-400">
                   &ldquo;{selectedDefinition.example}&rdquo;
@@ -249,7 +281,7 @@ export function TaxTermSearch({ language }: TaxTermSearchProps) {
                     <CheckIcon />
                   </span>
                   <h3 className="text-xs font-semibold uppercase tracking-wider text-teal-100">
-                    {SECTION_LABELS[language].actionTip}
+                    {getSectionLabels(language).actionTip}
                   </h3>
                 </div>
                 <p className="leading-relaxed text-white">
@@ -259,7 +291,10 @@ export function TaxTermSearch({ language }: TaxTermSearchProps) {
             </div>
           </article>
         )}
-        {!selectedDefinition && !definitionLoading && (
+        {translationNotFoundForLanguage && !definitionLoading && (
+          <LanguageNotFound languageCodeOrName={translationNotFoundForLanguage} />
+        )}
+        {!selectedDefinition && !translationNotFoundForLanguage && !definitionLoading && (
           <div className="flex h-full items-center justify-center p-8 text-center text-zinc-500 dark:text-zinc-400">
             Select a term to view its definition.
           </div>

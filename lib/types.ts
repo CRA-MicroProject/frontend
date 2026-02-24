@@ -1,10 +1,12 @@
-export type LanguageCode = "en" | "mn" | "pt";
+/** Language code from API (e.g. en, fr, pt-br). Dynamic per backend. */
+export type LanguageCode = string;
 
-export const LANGUAGES: { code: LanguageCode; label: string }[] = [
-  { code: "en", label: "English" },
-  { code: "mn", label: "Mongolian" },
-  { code: "pt", label: "Portuguese" },
-];
+/** Language option from getAvailableLanguages API */
+export interface LanguageOption {
+  code: string;
+  name: string;
+  translatedName: string;
+}
 
 /** Translations for a single field (en, mn, pt) */
 export type TranslatedField = Record<LanguageCode, string>;
