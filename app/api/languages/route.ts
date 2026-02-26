@@ -31,8 +31,8 @@ export async function GET() {
   }
 
   return NextResponse.json([
-    { code: "en", name: "English", translatedName: "English" },
-    { code: "mn", name: "Mongolian", translatedName: "Монгол хэл" },
-    { code: "pt", name: "Portuguese", translatedName: "Português" },
+    { locale_code: "en", language_name_english: "English", language_name_native: "English" },
+    { locale_code: "mn", language_name_english: "Mongolian", language_name_native: "Монгол хэл" },
+    { locale_code: "pt", language_name_english: "Portuguese", language_name_native: "Português" },
   ]);
 }

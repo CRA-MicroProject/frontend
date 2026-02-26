@@ -21,6 +21,37 @@ export async function GET(
   const baseUrl = backendBaseUrl();
   if (baseUrl) {
     try {
+      if (lang === "en") {
+        const englishRes = await fetch(
+          `${baseUrl}/crahelper/getAllEnglishTerms`,
+          { cache: "no-store" }
+        );
+        if (!englishRes.ok) throw new Error("Backend fetch failed");
+        const englishData = (await englishRes.json()) as Array<{
+          term_id: number;
+          original_term: string;
+          original_description: string;
+        }>;
+        const found = englishData.find((t) => String(t.term_id) === id);
+        if (!found) {
+          return NextResponse.json(
+            { error: "Term not found" },
+            { status: 404 }
+          );
+        }
+        const desc = found.original_description || found.original_term;
+        const payload = {
+          id: String(found.term_id),
+          term: found.original_term,
+          definition: desc,
+          plainLanguage: desc,
+          whyItMatters: desc,
+          example: desc,
+          actionTip: desc,
+        };
+        return NextResponse.json(payload);
+      }
+
       const translationRes = await fetch(
         `${baseUrl}/crahelper/getTermTranslation?termId=${encodeURIComponent(id)}&lang=${encodeURIComponent(lang)}`,
         { cache: "no-store" }
@@ -53,27 +84,10 @@ export async function GET(
         typeof translationData.translated_term === "string"
           ? translationData.translated_term
           : translationData.translated_term.term;
-      let definition: string =
+      const definition: string =
         typeof translationData.translated_description === "string"
           ? translationData.translated_description
           : translationData.translated_description ?? (translationData.translated_term as { term: string }).term;
-
-      if (lang === "en" && !definition) {
-        const metaRes = await fetch(
-          `${baseUrl}/crahelper/getAllEnglishTermsAndMetadata`,
-          { cache: "no-store" }
-        );
-        if (metaRes.ok) {
-          const meta = (await metaRes.json()) as Array<{
-            term_id: number;
-            english: string;
-            description: string;
-          }>;
-          const found = meta.find((m) => m.term_id === translationData.term_id);
-          if (found) definition = found.description;
-        }
-        if (!definition) definition = term;
-      }
 
       const fallback = definition || translationData.translated_term;
       const payload = {

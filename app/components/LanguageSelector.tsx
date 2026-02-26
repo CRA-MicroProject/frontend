@@ -9,6 +9,12 @@ interface LanguageOption {
   language_name_native: string;
 }
 
+const ENGLISH_OPTION: LanguageOption = {
+  locale_code: "en",
+  language_name_english: "English",
+  language_name_native: "English",
+};
+
 interface LanguageSelectorProps {
   value: LanguageCode;
   onChange: (lang: LanguageCode) => void;
@@ -30,9 +36,13 @@ export function LanguageSelector({ value, onChange }: LanguageSelectorProps) {
       })
       .then((data: LanguageOption[]) => {
         if (!cancelled) {
-          setLanguages(data);
-          if (data.length > 0 && !data.some((l) => l.locale_code === value)) {
-            onChange(data[0].locale_code);
+          const withEnglishFirst = [
+            ENGLISH_OPTION,
+            ...data.filter((l) => l.locale_code !== "en"),
+          ];
+          setLanguages(withEnglishFirst);
+          if (withEnglishFirst.length > 0 && !withEnglishFirst.some((l) => l.locale_code === value)) {
+            onChange(withEnglishFirst[0].locale_code);
           }
         }
       })
