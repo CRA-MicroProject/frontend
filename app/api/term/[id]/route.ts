@@ -40,19 +40,23 @@ export async function GET(
         );
       }
       const translationData = (await translationRes.json()) as {
-        termId: number;
-        language: string;
-        translation: string | { term: string; description?: string };
+        term_id: number;
+        locale_code: string;
+        translated_term: string | { term: string; description?: string };
+        translated_description: string;
+        verified_by: string;
+        translation_datetime: string;
+        translation_id: number;
       };
 
       const term =
-        typeof translationData.translation === "string"
-          ? translationData.translation
-          : translationData.translation.term;
+        typeof translationData.translated_term === "string"
+          ? translationData.translated_term
+          : translationData.translated_term.term;
       let definition: string =
-        typeof translationData.translation === "string"
-          ? ""
-          : translationData.translation.description ?? translationData.translation.term;
+        typeof translationData.translated_description === "string"
+          ? translationData.translated_description
+          : translationData.translated_description ?? (translationData.translated_term as { term: string }).term;
 
       if (lang === "en" && !definition) {
         const metaRes = await fetch(
@@ -61,21 +65,21 @@ export async function GET(
         );
         if (metaRes.ok) {
           const meta = (await metaRes.json()) as Array<{
-            termId: number;
+            term_id: number;
             english: string;
             description: string;
           }>;
-          const found = meta.find((m) => m.termId === translationData.termId);
+          const found = meta.find((m) => m.term_id === translationData.term_id);
           if (found) definition = found.description;
         }
         if (!definition) definition = term;
       }
 
-      const fallback = definition || term;
+      const fallback = definition || translationData.translated_term;
       const payload = {
-        id: String(translationData.termId),
+        id: String(translationData.term_id),
         term,
-        definition: definition || term,
+        definition: definition || (translationData.translated_term as { term: string }).term,
         plainLanguage: fallback,
         whyItMatters: fallback,
         example: fallback,

@@ -6,9 +6,9 @@ const backendBaseUrl = () =>
   process.env.TAX_API_BASE_URL;
 
 export interface LanguageOption {
-  code: string;
-  name: string;
-  translatedName: string;
+  locale_code: string;
+  language_name_english: string;
+  language_name_native: string;
 }
 
 export async function GET() {

@@ -13,24 +13,25 @@ export async function GET(request: NextRequest) {
   if (baseUrl) {
     try {
       const res = await fetch(
-        `${baseUrl}/crahelper/getAllEnglishTermsAndMetadata`,
+        `${baseUrl}/crahelper/getAllEnglishTerms`,
         { cache: "no-store" }
       );
       if (!res.ok) throw new Error("Backend fetch failed");
       const data = (await res.json()) as Array<{
-        termId: number;
-        english: string;
-        description: string;
+        term_id: number;
+        original_term: string;
+        original_description: string;
       }>;
       const terms = data.map((t) => ({
-        id: String(t.termId),
-        label: t.english,
+        id: String(t.term_id),
+        label: t.original_term,
+        description: t.original_description,
       }));
       const filtered = q
         ? terms.filter(
             (t) =>
               t.label.toLowerCase().includes(q) ||
-              (data.find((d) => String(d.termId) === t.id)?.description ?? "")
+              (data.find((d) => String(d.term_id) === t.id)?.original_description ?? "")
                 .toLowerCase()
                 .includes(q)
           )

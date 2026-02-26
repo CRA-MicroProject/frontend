@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import type { LanguageCode } from "@/lib/types";
 
 interface LanguageOption {
-  code: string;
-  name: string;
-  translatedName: string;
+  locale_code: string;
+  language_name_english: string;
+  language_name_native: string;
 }
 
 interface LanguageSelectorProps {
@@ -31,8 +31,8 @@ export function LanguageSelector({ value, onChange }: LanguageSelectorProps) {
       .then((data: LanguageOption[]) => {
         if (!cancelled) {
           setLanguages(data);
-          if (data.length > 0 && !data.some((l) => l.code === value)) {
-            onChange(data[0].code);
+          if (data.length > 0 && !data.some((l) => l.locale_code === value)) {
+            onChange(data[0].locale_code);
           }
         }
       })
@@ -58,7 +58,7 @@ export function LanguageSelector({ value, onChange }: LanguageSelectorProps) {
       </label>
       <select
         id="lang-select"
-        value={languages.some((l) => l.code === value) ? value : languages[0]?.code ?? value}
+        value={languages.some((l) => l.locale_code === value) ? value : languages[0]?.locale_code ?? value}
         onChange={(e) => onChange(e.target.value as LanguageCode)}
         disabled={loading || languages.length === 0}
         className="rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm focus:border-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500 disabled:opacity-60 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100"
@@ -66,9 +66,9 @@ export function LanguageSelector({ value, onChange }: LanguageSelectorProps) {
         {loading && languages.length === 0 ? (
           <option value={value}>Loading…</option>
         ) : (
-          languages.map(({ code, translatedName, name }) => (
-            <option key={code} value={code}>
-              {translatedName || name}
+          languages.map(({ locale_code, language_name_english, language_name_native }) => (
+            <option key={locale_code} value={locale_code}>
+              {language_name_english || language_name_native}
             </option>
           ))
         )}
