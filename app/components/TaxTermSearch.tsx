@@ -30,36 +30,26 @@ function CheckIcon() {
 const SECTION_LABELS: Record<string, Record<string, string>> = {
   en: {
     alsoKnownAs: "Also known as",
-    plainLanguage: "IN PLAIN LANGUAGE",
-    whyItMatters: "WHY DOES THIS MATTER?",
     example: "EXAMPLE",
     actionTip: "ACTION TIP",
   },
   mn: {
     alsoKnownAs: "Өөр нэр",
-    plainLanguage: "ЭНГИЙН ХЭЛЭЭР",
-    whyItMatters: "ЯАГААД ЭНЭ ЧУХАЛ ВЭ?",
     example: "ЖИШЭЭ",
     actionTip: "ҮЙЛДЭЛ",
   },
   pt: {
     alsoKnownAs: "Também conhecido como",
-    plainLanguage: "EM LINGUAGEM SIMPLES",
-    whyItMatters: "POR QUE ISSO IMPORTA?",
     example: "EXEMPLO",
     actionTip: "DICA DE AÇÃO",
   },
   fr: {
     alsoKnownAs: "Aussi connu sous le nom de",
-    plainLanguage: "EN LANGAGE SIMPLE",
-    whyItMatters: "POURQUOI C'EST IMPORTANT ?",
     example: "EXEMPLE",
     actionTip: "CONSEIL D'ACTION",
   },
   "pt-br": {
     alsoKnownAs: "Também conhecido como",
-    plainLanguage: "EM LINGUAGEM SIMPLES",
-    whyItMatters: "POR QUE ISSO IMPORTA?",
     example: "EXEMPLO",
     actionTip: "DICA DE AÇÃO",
   },
@@ -156,9 +146,9 @@ export function TaxTermSearch({ language }: TaxTermSearchProps) {
   }, []);
 
   return (
-    <div className="flex w-full flex-col gap-4 md:flex-row md:min-h-[420px]">
+    <div className="flex max-h-[calc(100vh-15rem)] w-full min-h-0 flex-col gap-4 md:flex-row md:min-h-[420px]">
       {/* Left panel: search + results */}
-      <aside className="flex w-full shrink-0 flex-col gap-3 md:w-80 md:border-r md:border-zinc-200 md:pr-4 dark:md:border-zinc-700">
+      <aside className="flex min-h-0 w-full shrink-0 flex-col gap-3 md:w-80 md:border-r md:border-zinc-200 md:pr-4 dark:md:border-zinc-700">
         <div className="relative">
           <input
             type="search"
@@ -185,7 +175,7 @@ export function TaxTermSearch({ language }: TaxTermSearchProps) {
         )}
 
         <ul
-          className="flex-1 overflow-y-auto rounded-lg border border-zinc-200 bg-white shadow-sm dark:border-zinc-700 dark:bg-zinc-800 md:min-h-0"
+          className="min-h-0 flex-1 overflow-y-auto rounded-lg border border-zinc-200 bg-white shadow-sm dark:border-zinc-700 dark:bg-zinc-800"
           role="listbox"
         >
           {terms.length > 0 ? (
@@ -209,7 +199,7 @@ export function TaxTermSearch({ language }: TaxTermSearchProps) {
       </aside>
 
       {/* Right panel: selected result */}
-      <section className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700 md:min-h-[420px]">
+      <section className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700 md:min-h-[420px] h-fit">
         {definitionLoading && (
           <div className="flex h-full items-center justify-center p-8 text-zinc-500 dark:text-zinc-400">
             Loading definition…
@@ -227,55 +217,33 @@ export function TaxTermSearch({ language }: TaxTermSearchProps) {
               <h2 className="text-2xl font-bold text-white">
                 {selectedDefinition.term}
               </h2>
-              <p className="mt-2 italic leading-relaxed text-zinc-200">
-                {selectedDefinition.definition}
-              </p>
             </div>
 
             {/* Content sections (light) */}
             <div className="flex flex-1 flex-col gap-0 bg-white dark:bg-zinc-950">
-              {/* In plain language */}
-              <div className="border-b border-zinc-200 px-5 py-4 dark:border-zinc-800">
-                <div className="mb-2 flex items-center gap-2">
-                  <span className="text-zinc-500 dark:text-zinc-400" aria-hidden>
-                    <BookIcon />
-                  </span>
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
-                    {getSectionLabels(language).plainLanguage}
-                  </h3>
+              
+              {/* Definition */}
+              {selectedDefinition.definition && (
+                <div className="border-b border-zinc-200 px-5 py-4 dark:border-zinc-800">
+                  <p className="italic leading-relaxed text-zinc-600 dark:text-zinc-400">
+                    {selectedDefinition.definition}
+                  </p>
                 </div>
-                <p className="leading-relaxed text-zinc-700 dark:text-zinc-300">
-                  {selectedDefinition.plainLanguage}
-                </p>
-              </div>
-
-              {/* Why does this matter? (boxed) */}
-              <div className="border-b border-zinc-200 bg-zinc-100/80 px-5 py-4 dark:border-zinc-800 dark:bg-zinc-800/50">
-                <div className="mb-2 flex items-center gap-2">
-                  <span className="text-zinc-500 dark:text-zinc-400" aria-hidden>
-                    <InfoIcon />
-                  </span>
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-                    {getSectionLabels(language).whyItMatters}
-                  </h3>
-                </div>
-                <p className="leading-relaxed text-zinc-700 dark:text-zinc-300">
-                  {selectedDefinition.whyItMatters}
-                </p>
-              </div>
-
+              )}
               {/* Example */}
-              <div className="border-b border-zinc-200 px-5 py-4 dark:border-zinc-800">
+              {selectedDefinition.example && (
+                <div className="border-b border-zinc-200 px-5 py-4 dark:border-zinc-800">
                 <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
                   {getSectionLabels(language).example}
                 </h3>
                 <p className="italic leading-relaxed text-zinc-600 dark:text-zinc-400">
                   &ldquo;{selectedDefinition.example}&rdquo;
                 </p>
-              </div>
+              </div>)}
 
               {/* Action tip (teal box) */}
-              <div className="m-4 mt-4 rounded-lg bg-teal-700 px-4 py-4 text-white dark:bg-teal-800">
+              {selectedDefinition.actionTip && (
+                <div className="m-4 mt-4 rounded-lg bg-teal-700 px-4 py-4 text-white dark:bg-teal-800">
                 <div className="mb-2 flex items-center gap-2">
                   <span aria-hidden>
                     <CheckIcon />
@@ -287,7 +255,7 @@ export function TaxTermSearch({ language }: TaxTermSearchProps) {
                 <p className="leading-relaxed text-white">
                   {selectedDefinition.actionTip}
                 </p>
-              </div>
+              </div>)}
             </div>
           </article>
         )}

@@ -5,6 +5,7 @@ const backendBaseUrl = () =>
   process.env.BACKEND_URL ??
   process.env.TAX_API_BASE_URL;
 
+/** Matches Languages table: locale_code (PK), language_name_english, language_name_native */
 export interface LanguageOption {
   locale_code: string;
   language_name_english: string;

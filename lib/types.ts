@@ -17,8 +17,6 @@ export interface TaxTermRecord {
   term: TranslatedField;
   alsoKnownAs?: TranslatedField;
   definition: TranslatedField;
-  plainLanguage: TranslatedField;
-  whyItMatters: TranslatedField;
   example: TranslatedField;
   actionTip: TranslatedField;
 }
@@ -35,8 +33,6 @@ export interface TermDefinition {
   term: string;
   alsoKnownAs?: string;
   definition: string;
-  plainLanguage: string;
-  whyItMatters: string;
   example: string;
   actionTip: string;
 }
