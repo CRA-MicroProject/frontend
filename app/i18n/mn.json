@@ -1,0 +1,71 @@
+{
+    "app.language.english": {
+        "message": "Англи"
+    },
+    "app.language.mongolian": {
+        "message": "Монгол"
+    },
+    "app.language.portuguese": {
+        "message": "Португал"
+    },
+    "app.header.navBtn": {
+        "message": "Татварын нэр томьёо хайх"
+    },
+    "app.mainbanner.hero": {
+        "message": "Канадын Татвар, Таны Хэлээр."
+    },
+    "app.mainbanner.sub": {
+        "message": "Татварын төвөгтэй нэр томьёог энгийн хэлээр тайлбарлаж байна. Таны ойлголт болон маягтын хоорондох зааг ялгааг арилгана."
+    },
+    "app.mainbanner.startBtn": {
+        "message": "Татварын нэр томьёо тайлбарлах"
+    },
+    "app.mainbanner.badge": {
+        "message": "Шинээр ирэгсдэд зориулав"
+    },
+    "app.howItWorks.label": {
+        "message": "Хэрхэн ажилладаг"
+    },
+    "app.howItWorks.step1.title": {
+        "message": "Хэлээ сонгоно уу"
+    },
+    "app.howItWorks.step1.desc": {
+        "message": "Танд ойлгомжтой тайлбарыг харахын тулд хүссэн хэлээ сонгоно уу."
+    },
+    "app.howItWorks.step2.title": {
+        "message": "Нэр томьёо хайх"
+    },
+    "app.howItWorks.step2.desc": {
+        "message": "Татварын баримт дээр гарч буй нэр томьёо эсвэл хайрцгийн дугаарыг хайна уу."
+    },
+    "app.howItWorks.step3.title": {
+        "message": "Суралцах"
+    },
+    "app.howItWorks.step3.desc": {
+        "message": "Татварын маягтаа бөглөхөд туслах энгийн тайлбар, жишээ болон зөвлөмжийг харна уу."
+    },
+    "app.trust.mainLabel": {
+        "message": "Яагаад бидэнд итгэж болох вэ"
+    },
+    "app.trust.title": {
+        "message": "Таны нууцлал бол бидний тэргүүлэх чиглэл"
+    },
+    "app.trust.trustPoint1": {
+        "message": "Зөвхөн боловсролын зорилготой: Бид нэр томьёог тайлбарладаг, таны өмнөөс мэдүүлэг гаргадаггүй."
+    },
+    "app.trust.trustPoint2": {
+        "message": "Олон нийтээр баталгаажсан: Орчуулгуудыг төрөлх хэлтэй мэргэжлийн сайн дурынхан хянадаг."
+    },
+    "app.trust.trustPoint3": {
+        "message": "Өгөгдөл хадгалдаггүй: Бид нэр, НДШ, орлогын дүн асуудаггүй. Ямар ч мэдээлэл хадгалдаггүй."
+    },
+    "app.trust.trustPoint4": {
+        "message": "Дагалдах хэрэгсэл: Бид таны ашиглаж буй мэдүүлгийн програмтай хамтран илүү хүртээмжтэй болгоход тусалдаг."
+    },
+    "app.trust.verifiedSecure": {
+        "message": "Баталгаатай Аюулгүй"
+    },
+    "app.footer.project": {
+        "message": "TaxDecoder Олон Хэлний Төсөл"
+    }
+}

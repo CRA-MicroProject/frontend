@@ -1,0 +1,71 @@
+{
+    "app.language.english": {
+        "message": "Inglês"
+    },
+    "app.language.mongolian": {
+        "message": "Mongol"
+    },
+    "app.language.portuguese": {
+        "message": "Português"
+    },
+    "app.header.navBtn": {
+        "message": "Pesquisar termo fiscal"
+    },
+    "app.mainbanner.hero": {
+        "message": "Impostos Canadenses, Explicados na Sua Língua."
+    },
+    "app.mainbanner.sub": {
+        "message": "Explicações em linguagem simples para termos fiscais complexos. Reduza a distância entre os formulários da CRA e sua compreensão."
+    },
+    "app.mainbanner.startBtn": {
+        "message": "Explicar termo fiscal agora"
+    },
+    "app.mainbanner.badge": {
+        "message": "Feito para recém-chegados"
+    },
+    "app.howItWorks.label": {
+        "message": "Como Funciona"
+    },
+    "app.howItWorks.step1.title": {
+        "message": "Selecione o Idioma"
+    },
+    "app.howItWorks.step1.desc": {
+        "message": "Escolha seu idioma preferido para ver explicações que você entende."
+    },
+    "app.howItWorks.step2.title": {
+        "message": "Pesquise o Termo"
+    },
+    "app.howItWorks.step2.desc": {
+        "message": "Pesquise o termo fiscal específico ou o número da caixa como aparece no seu comprovante."
+    },
+    "app.howItWorks.step3.title": {
+        "message": "Aprenda"
+    },
+    "app.howItWorks.step3.desc": {
+        "message": "Veja uma explicação simples, um exemplo e uma dica de ação para ajudar a preencher seu formulário."
+    },
+    "app.trust.mainLabel": {
+        "message": "Por que você pode confiar em nós"
+    },
+    "app.trust.title": {
+        "message": "Sua Privacidade É Nossa Prioridade"
+    },
+    "app.trust.trustPoint1": {
+        "message": "Somente para fins educacionais: Explicamos os termos, não declaramos por você."
+    },
+    "app.trust.trustPoint2": {
+        "message": "Verificado pela comunidade: As traduções são revisadas por voluntários profissionais nativos."
+    },
+    "app.trust.trustPoint3": {
+        "message": "Sem armazenamento de dados: Nunca pedimos seu nome, SIN ou valores de renda. Não salvamos nenhum dado."
+    },
+    "app.trust.trustPoint4": {
+        "message": "Ferramenta complementar: Atuamos ao lado do seu software de declaração para torná-lo mais acessível."
+    },
+    "app.trust.verifiedSecure": {
+        "message": "Segurança Verificada"
+    },
+    "app.footer.project": {
+        "message": "Projeto Multilíngue TaxDecoder"
+    }
+}

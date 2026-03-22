@@ -1,0 +1,163 @@
+{
+    "app.language.english": {
+        "message": "English",
+        "description": "Language selector label for English"
+    },
+    "app.language.mongolian": {
+        "message": "Mongolian",
+        "description": "Language selector label for Mongolian"
+    },
+    "app.language.portuguese": {
+        "message": "Portuguese",
+        "description": "Language selector label for Portuguese"
+    },
+    "app.header.navBtn": {
+        "message": "Search tax term",
+        "description": "The label for the navigation button in the header section"
+    },
+    "app.mainbanner.hero": {
+        "message": "Canadian Taxes, Explained in Your Language.",
+        "description": "The main label for the hero section"
+    },
+    "app.mainbanner.sub": {
+        "message": "Plain-language explanations for complex tax terms. Bridge the gap between CRA forms and your understanding.",
+        "description": "The subtitle for the hero section"
+    },
+    "app.mainbanner.startBtn": {
+        "message": "Explain tax term now",
+        "description": "The label for the start button in the hero section"
+    },
+
+    "app.mainbanner.placeholder": {
+        "message": "Search terms like 'T4', 'RRSP', 'CCB'...",
+        "description": "The placeholder text for the search input in the hero section"
+    },
+    "app.mainbanner.searchBtn": {
+        "message": "Search tax term",
+        "description": "The label for the search button in the hero section"
+    },
+    "app.mainbanner.topicsHeader": {
+        "message": "Explore commonly searched topics:",
+        "description": "The header for the topics section in the hero section"
+    },
+    "app.mainbanner.seeMore": {
+        "message": "See more",
+        "description": "The label for the 'see more' link in the hero section"
+    },
+    "app.mainbanner.home": {
+        "message": "Home",
+        "description": "The label for the home link in the hero section"
+    },
+    "app.mainbanner.contextLine": {
+        "message": "Canada Tax Companion",
+        "description": "The context line in the hero section"
+    },
+    "app.mainbanner.welcome": {
+        "message": "You're in Wealthsimple Tax—",
+        "description": "The welcome message in the hero section"
+    },
+    "app.mainbanner.decodeThis": {
+        "message": "let's decode this.",
+        "description": "The decode message in the hero section"
+    },
+    "app.mainbanner.loading": {
+        "message": "Consulting tax experts...",
+        "description": "The loading message in the hero section"
+    },
+    "app.mainbanner.alsoKnown": {
+        "message": "Also known as:",
+        "description": "The 'also known as' label in the hero section"
+    },
+    "app.mainbanner.plainLang": {
+        "message": "In Plain Language",
+        "description": "The 'in plain language' label in the hero section"
+    },
+    "app.mainbanner.whyMatters": {
+        "message": "Why does this matter?",
+        "description": "The 'why does this matter?' label in the hero section"
+    },
+    "app.mainbanner.actionTip": {
+        "message": "Action Tip",
+        "description": "The 'action tip' label in the hero section"
+    },
+    "app.mainbanner.example": {
+        "message": "Example",
+        "description": "The 'example' label in the hero section"
+    },
+    "app.mainbanner.decodePrompt": {
+        "message": "Search to begin decoding...",
+        "description": "The decode prompt in the hero section"
+    },
+    "app.mainbanner.cautionText": {
+        "message": "Caution: Translated by Google, not verified",
+        "description": "The caution text in the hero section"
+    },
+    "app.mainbanner.unavailable": {
+        "message": "Plain language translation not yet available",
+        "description": "The unavailable message in the hero section"
+    },
+    "app.mainbanner.badge": {
+        "message": "Built for Newcomers",
+        "description": "Small badge text above hero"
+    },
+    "app.howItWorks.label": {
+        "message": "How It Works",
+        "description": "Section label for how it works"
+    },
+    "app.howItWorks.step1.title": {
+        "message": "Select Language",
+        "description": "Step 1 title"
+    },
+    "app.howItWorks.step1.desc": {
+        "message": "Choose your preferred language to see explanations you understand.",
+        "description": "Step 1 description"
+    },
+    "app.howItWorks.step2.title": {
+        "message": "Search Term",
+        "description": "Step 2 title"
+    },
+    "app.howItWorks.step2.desc": {
+        "message": "Search for the specific tax term or box number as it appears in your tax slip.",
+        "description": "Step 2 description"
+    },
+    "app.howItWorks.step3.title": {
+        "message": "Learn",
+        "description": "Step 3 title"
+    },
+    "app.howItWorks.step3.desc": {
+        "message": "See a simple explanation, an example, and an action tip to help you fill out your tax form.",
+        "description": "Step 3 description"
+    },
+    "app.trust.mainLabel": {
+        "message": "Why you can trust us",
+        "description": "The main label for the trust section"
+    },
+    "app.trust.title": {
+        "message": "Your Privacy is Our Priority",
+        "description": "The title for the trust section"
+    },
+    "app.trust.trustPoint1": {
+        "message": "Educational Purpose Only: We explain terms, we don't file for you.",
+        "description": "Trust point 1 for the trust section"
+    },
+    "app.trust.trustPoint2": {
+        "message": "Community Verified: Translations are reviewed by native-speaking professional volunteers.",
+        "description": "Trust point 2 for the trust section"
+    },
+    "app.trust.trustPoint3": {
+        "message": "No Data Storage: We never ask for your name, SIN, or income values. We don't save any data.",
+        "description": "Trust point 3 for the trust section"
+    },
+    "app.trust.trustPoint4": {
+        "message": "Pure Companion Tool: We sit alongside your filing software to make it more accessible.",
+        "description": "Trust point 4 for the trust section"
+    },
+    "app.trust.verifiedSecure": {
+        "message": "Verified Secure",
+        "description": "Badge text in trust section"
+    },
+    "app.footer.project": {
+        "message": "TaxDecoder Multilingual Project",
+        "description": "The main title displayed on the footer"
+    }
+}

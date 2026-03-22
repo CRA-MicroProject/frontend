@@ -1,14 +1,20 @@
-import { TaxGlossary } from "./components/TaxGlossary";
+import Header from './components/landing/Header';
+import MainBanner from './components/landing/MainBanner';
+import HowItWorks from './components/landing/HowItWorks';
+import TrustUs from './components/landing/TrustUs';
+import Footer from './components/landing/Footer';
+import { LanguageProvider } from './hooks/languageContext';
 
-export default function Home() {
-  return (
-    <div className="min-h-screen bg-zinc-50 font-sans dark:bg-zinc-950">
-      <main className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
-        <h1 className="mb-8 text-2xl font-semibold text-zinc-900 dark:text-zinc-100">
-          Tax terms glossary
-        </h1>
-        <TaxGlossary />
-      </main>
-    </div>
-  );
+export default function Landing() {
+    return (
+        <div className="min-h-screen bg-white text-slate-900 overflow-x-hidden font-inter">
+            <LanguageProvider>
+                <Header />
+                <MainBanner />
+                <HowItWorks />
+                <TrustUs />
+                <Footer />
+            </LanguageProvider>
+        </div>
+    );
 }
