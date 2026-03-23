@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SelectedLanguageProvider } from "./context/SelectedLanguageContext";
+import { SelectedTaxTermProvider } from "./context/SelectedTaxTermContext";
 import "./globals.css";
+import { TopBar } from "./components/TopBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +30,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <SelectedLanguageProvider>
+          <SelectedTaxTermProvider>
+            
+            <TopBar />  
+            {children}
+            </SelectedTaxTermProvider>
+        </SelectedLanguageProvider>
       </body>
     </html>
   );
