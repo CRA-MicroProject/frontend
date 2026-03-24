@@ -5,14 +5,44 @@ import {
 } from 'lucide-react';
 import { useRouter } from "next/navigation";
 import { useIntl } from "react-intl";
-import { useLanguage } from "../../hooks/languageContext";
-import type { Language } from "../../hooks/languageContext";
+import { useSelectedLanguage } from "../../context/SelectedLanguageContext";
+import {
+    landingLanguageFromCode,
+    selectedLanguageFromLanding,
+    type LandingLanguage,
+} from "../../scripts/landingLanguages";
 import { renderLanguageFlag, useLandingLanguageLabels } from "../../scripts/useLandingLanguageMeta";
 import styles from "./Landing.module.css";
 
+type LangBoxProps = {
+    lang: LandingLanguage;
+    label: string;
+    isActive: boolean;
+    onSelect: (lang: LandingLanguage) => void;
+};
+
+function LangBox({ lang, label, isActive, onSelect }: LangBoxProps) {
+    return (
+        <button
+            type="button"
+            onClick={() => onSelect(lang)}
+            className={`${styles.heroLangBox} ${isActive ? styles.heroLangActive : styles.heroLangInactive}`}
+        >
+            <span>{renderLanguageFlag(lang, styles.heroFlag)}</span>
+            <span
+                className={`${styles.heroLangLabel} ${isActive ? styles.heroLangLabelActive : styles.heroLangLabelInactive}`}
+            >
+                {label}
+            </span>
+            {isActive && <div className={styles.heroLangPulse}></div>}
+        </button>
+    );
+}
+
 const MainBanner = () => {
 
-    const { language, setLanguage } = useLanguage();
+    const { selectedLanguage, setSelectedLanguage } = useSelectedLanguage();
+    const language = landingLanguageFromCode(selectedLanguage?.code);
     const router = useRouter();
     const intl = useIntl();
 
@@ -23,18 +53,9 @@ const MainBanner = () => {
     const heroFirstLine = heroParts[0] ?? heroText;
     const heroSecondLine = heroParts.slice(1).join(", ");
 
-    const LangBox = ({ lang, label }: { lang: Language, label: string }) => (
-        <button
-            onClick={() => setLanguage(lang)}
-            className={`${styles.heroLangBox} ${language === lang ? styles.heroLangActive : styles.heroLangInactive}`}
-        >
-            <span>{renderLanguageFlag(lang, styles.heroFlag)}</span>
-            <span className={`${styles.heroLangLabel} ${language === lang ? styles.heroLangLabelActive : styles.heroLangLabelInactive}`}>{label}</span>
-            {language === lang && (
-                <div className={styles.heroLangPulse}></div>
-            )}
-        </button>
-    );
+    const handleLangSelect = (lang: LandingLanguage) => {
+        setSelectedLanguage(selectedLanguageFromLanding(lang));
+    };
 
     return (
 
@@ -58,9 +79,24 @@ const MainBanner = () => {
 
             {/* Language Boxes */}
             <div className={styles.heroLangGrid}>
-                <LangBox lang="English" label={languageLabels.English} />
-                <LangBox lang="Mongolian" label={languageLabels.Mongolian} />
-                <LangBox lang="Portuguese" label={languageLabels.Portuguese} />
+                <LangBox
+                    lang="English"
+                    label={languageLabels.English}
+                    isActive={language === "English"}
+                    onSelect={handleLangSelect}
+                />
+                <LangBox
+                    lang="Mongolian"
+                    label={languageLabels.Mongolian}
+                    isActive={language === "Mongolian"}
+                    onSelect={handleLangSelect}
+                />
+                <LangBox
+                    lang="Portuguese"
+                    label={languageLabels.Portuguese}
+                    isActive={language === "Portuguese"}
+                    onSelect={handleLangSelect}
+                />
             </div>
 
             <div className={styles.heroCtaWrap}>

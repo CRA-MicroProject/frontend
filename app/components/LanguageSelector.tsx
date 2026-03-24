@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { LanguageCode } from "@/lib/types";
+import { useSelectedLanguage } from "../context/SelectedLanguageContext";
 
 interface LanguageOption {
   locale_code: string;
@@ -15,15 +15,12 @@ const ENGLISH_OPTION: LanguageOption = {
   language_name_native: "English",
 };
 
-interface LanguageSelectorProps {
-  value: LanguageCode;
-  onChange: (lang: LanguageCode) => void;
-}
-
-export function LanguageSelector({ value, onChange }: LanguageSelectorProps) {
+export function LanguageSelector() {
+  const { selectedLanguage, setSelectedLanguage } = useSelectedLanguage();
   const [languages, setLanguages] = useState<LanguageOption[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const selectedCode = selectedLanguage?.code ?? "en";
 
   useEffect(() => {
     let cancelled = false;
@@ -41,8 +38,13 @@ export function LanguageSelector({ value, onChange }: LanguageSelectorProps) {
             ...data.filter((l) => l.locale_code !== "en"),
           ];
           setLanguages(withEnglishFirst);
-          if (withEnglishFirst.length > 0 && !withEnglishFirst.some((l) => l.locale_code === value)) {
-            onChange(withEnglishFirst[0].locale_code);
+          if (withEnglishFirst.length > 0 && !withEnglishFirst.some((l) => l.locale_code === selectedCode)) {
+            const fallback = withEnglishFirst[0];
+            setSelectedLanguage({
+              code: fallback.locale_code,
+              english_name: fallback.language_name_english || fallback.language_name_native,
+              native_name: fallback.language_name_native || fallback.language_name_english,
+            });
           }
         }
       })
@@ -61,24 +63,31 @@ export function LanguageSelector({ value, onChange }: LanguageSelectorProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- fetch once on mount
   }, []);
 
+  const handleLanguageChange = (code: string) => {
+    const option = languages.find((l) => l.locale_code === code);
+    if (!option) return;
+    setSelectedLanguage({
+      code: option.locale_code,
+      english_name: option.language_name_english || option.language_name_native,
+      native_name: option.language_name_native || option.language_name_english,
+    });
+  };
+
   return (
     <div className="flex items-center gap-2">
-      <label htmlFor="lang-select" className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-        Language
-      </label>
       <select
         id="lang-select"
-        value={languages.some((l) => l.locale_code === value) ? value : languages[0]?.locale_code ?? value}
-        onChange={(e) => onChange(e.target.value as LanguageCode)}
+        value={languages.some((l) => l.locale_code === selectedCode) ? selectedCode : languages[0]?.locale_code ?? selectedCode}
+        onChange={(e) => handleLanguageChange(e.target.value)}
         disabled={loading || languages.length === 0}
         className="rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm focus:border-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500 disabled:opacity-60 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100"
       >
         {loading && languages.length === 0 ? (
-          <option value={value}>Loading…</option>
+          <option value={selectedCode}>Loading…</option>
         ) : (
-          languages.map(({ locale_code, language_name_english, language_name_native }) => (
+          languages.map(({ locale_code, language_name_native }) => (
             <option key={locale_code} value={locale_code}>
-              {language_name_english || language_name_native}
+               {language_name_native}
             </option>
           ))
         )}
