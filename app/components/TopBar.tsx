@@ -36,13 +36,15 @@ export function TopBar() {
   const intl = useIntl();
   return (
     <header className="w-full border-b border-zinc-200 bg-white">
-        <Link className="mx-auto flex h-20 w-full max-w-6xl items-center justify-between px-4 sm:px-6" href="/">
+      <div className="mx-auto flex h-20 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
+        <Link  href="/">
           <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500 shadow-sm">
               <ShieldIcon />
             </div>
             <span className="text-2xl font-bold tracking-tight text-zinc-800">TaxDecoder</span>
           </div>
+        </Link>
           <div className="flex items-center gap-3">
             <LanguageSelector />
             <Link
@@ -52,7 +54,7 @@ export function TopBar() {
               {intl.formatMessage({ id: "app.header.navBtn" })}
             </Link>
           </div>
-        </Link>
+      </div>
     </header>
   );
 }
