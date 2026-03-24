@@ -42,7 +42,7 @@ export function TopBar() {
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500 shadow-sm">
               <ShieldIcon />
             </div>
-            <span className="text-2xl font-bold tracking-tight text-zinc-800">TaxDecoder</span>
+            <span className="hidden text-2xl font-bold tracking-tight text-zinc-800 md:inline">TaxDecoder</span>
           </div>
         </Link>
           <div className="flex items-center gap-3">

@@ -53,7 +53,7 @@ export function Term({
   selectedTaxTerm,
 }: TermProps) {
   return (
-    <section className="flex h-fit min-h-0 flex-1 flex-col overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700 md:min-h-[420px]">
+    <section className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700 md:min-h-[420px]">
       {definitionLoading && (
         <div className="flex h-full items-center justify-center p-8 text-zinc-500 dark:text-zinc-400">
           Loading definition…

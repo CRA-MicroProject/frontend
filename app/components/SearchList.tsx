@@ -25,7 +25,7 @@ export function SearchList({
   onSelectTerm,
 }: SearchListProps) {
   return (
-    <aside className="flex min-h-0 w-full shrink-0 flex-col gap-3 md:w-80 md:border-r md:border-zinc-200 md:pr-4 dark:md:border-zinc-700">
+    <aside className="flex min-h-0 w-full max-h-[min(42vh,20rem)] shrink-0 flex-col gap-3 border-b border-zinc-200 pb-4 dark:border-zinc-700 md:h-full md:max-h-full md:w-80 md:self-stretch md:border-b-0 md:border-r md:pr-4 md:pb-0">
       <div className="relative">
         <input
           type="search"
