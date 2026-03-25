@@ -98,7 +98,7 @@ export function TaxGlossary() {
   }, [setSelectedTaxTerm]);
 
   return (
-    <div className="flex h-[calc(100vh-15rem)] w-full min-h-0 flex-col items-stretch gap-4 overflow-hidden md:flex-row">
+    <div className="flex md:h-[calc(100vh-15rem)] w-full min-h-0 flex-col items-stretch gap-4 overflow-hidden md:flex-row">
       <SearchList
         query={query}
         loading={loading}
