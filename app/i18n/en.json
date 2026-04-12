@@ -156,6 +156,78 @@
         "message": "Verified Secure",
         "description": "Badge text in trust section"
     },
+    "app.contact.top-title": {
+        "message": "Get involved",
+        "description": "Small uppercase label above the contact form"
+    },
+    "app.contact.headline": {
+        "message": "Want to help with translation or new tax terms?",
+        "description": "Main heading for the contributor contact section"
+    },
+    "app.contact.intro": {
+        "message": "Tell us who you are and how you'd like to contribute. We read every message—no commitment required yet.",
+        "description": "Supporting paragraph under the contact section headline"
+    },
+    "app.contact.nameLabel": {
+        "message": "Name",
+        "description": "Label for the name field on the contact form"
+    },
+    "app.contact.namePlaceholder": {
+        "message": "Your name",
+        "description": "Placeholder for the name input"
+    },
+    "app.contact.emailLabel": {
+        "message": "Email",
+        "description": "Label for the email field on the contact form"
+    },
+    "app.contact.emailPlaceholder": {
+        "message": "you@example.com",
+        "description": "Placeholder for the email input"
+    },
+    "app.contact.helpLabel": {
+        "message": "How you'd like to help",
+        "description": "Label for the help description textarea"
+    },
+    "app.contact.helpPlaceholder": {
+        "message": "e.g. I can translate into Portuguese, or I can research and suggest definitions for terms in my region…",
+        "description": "Placeholder for the help description textarea"
+    },
+    "app.contact.submit": {
+        "message": "Send message",
+        "description": "Submit button label for the contact form"
+    },
+    "app.contact.sending": {
+        "message": "Sending…",
+        "description": "Submit button label while the contact form request is in flight"
+    },
+    "app.contact.validationEmailRequired": {
+        "message": "Please enter your email.",
+        "description": "Validation error when email is empty"
+    },
+    "app.contact.validationEmailInvalid": {
+        "message": "Please enter a valid email address.",
+        "description": "Validation error when email format is invalid"
+    },
+    "app.contact.validationNameRequired": {
+        "message": "Please enter your name.",
+        "description": "Validation error when name is empty"
+    },
+    "app.contact.validationHelpRequired": {
+        "message": "Please describe how you'd like to help.",
+        "description": "Validation error when help description is empty"
+    },
+    "app.contact.errorServer": {
+        "message": "Something went wrong. Please try again in a moment.",
+        "description": "Error when the contact API returns a non-success status"
+    },
+    "app.contact.errorNetwork": {
+        "message": "Could not reach the server. Check your connection and try again.",
+        "description": "Error when the contact form request fails due to network"
+    },
+    "app.contact.successSent": {
+        "message": "Thanks—we've received your message.",
+        "description": "Confirmation after the contact message is accepted"
+    },
     "app.footer.project": {
         "message": "TaxDecoder Multilingual Project",
         "description": "The main title displayed on the footer"

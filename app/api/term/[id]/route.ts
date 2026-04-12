@@ -86,6 +86,7 @@ export async function GET(
         `${baseUrl}/crahelper/getTermTranslation?termId=${encodeURIComponent(id)}&lang=${encodeURIComponent(lang)}`,
         { cache: "no-store" }
       );
+      // console.log("translationRes", await translationRes.json());
       if (!translationRes.ok) {
         const errBody = (await translationRes.json().catch(() => ({}))) as { error?: string };
         const message = errBody?.error ?? "Term not found";

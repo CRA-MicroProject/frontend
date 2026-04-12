@@ -79,6 +79,7 @@ export function TaxGlossary() {
           setTranslationNotFoundForLanguage(data.language ?? lang);
         } else {
           setError("Could not load definition.");
+          setTranslationNotFoundForLanguage(data.language ?? lang);
         }
       } else {
         const definitionData = data as TermDefinition;
@@ -102,7 +103,6 @@ export function TaxGlossary() {
       <SearchList
         query={query}
         loading={loading}
-        error={error}
         terms={terms}
         language={language}
         selectedTermId={selectedTaxTerm?.id ?? null}

@@ -2,6 +2,7 @@ import MainBanner from './components/landing/MainBanner';
 import HowItWorks from './components/landing/HowItWorks';
 import TrustUs from './components/landing/TrustUs';
 import Footer from './components/landing/Footer';
+import ContactForm from './components/landing/ContactForm';
 
 export default function Landing() {
     return (
@@ -9,6 +10,7 @@ export default function Landing() {
             <MainBanner />
             <HowItWorks />
             <TrustUs />
+            <ContactForm />
             <Footer />
         </div>
     );

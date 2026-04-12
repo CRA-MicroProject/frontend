@@ -6,7 +6,6 @@ import type { TaxTerm } from "@/lib/types";
 interface SearchListProps {
   query: string;
   loading: boolean;
-  error: string | null;
   terms: TaxTerm[];
   language: LanguageCode;
   selectedTermId: string | null;
@@ -17,7 +16,6 @@ interface SearchListProps {
 export function SearchList({
   query,
   loading,
-  error,
   terms,
   language,
   selectedTermId,
@@ -45,11 +43,6 @@ export function SearchList({
         )}
       </div>
 
-      {error && (
-        <p className="text-sm text-red-600 dark:text-red-400" role="alert">
-          {error}
-        </p>
-      )}
 
       <ul
         className="min-h-0 flex-1 overflow-y-auto rounded-lg border border-zinc-200 bg-white shadow-sm dark:border-zinc-700 dark:bg-zinc-800"
