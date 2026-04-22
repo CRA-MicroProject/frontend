@@ -65,60 +65,6 @@
     "app.trust.verifiedSecure": {
         "message": "Баталгаатай Аюулгүй"
     },
-    "app.contact.top-title": {
-        "message": "Оролцох"
-    },
-    "app.contact.headline": {
-        "message": "Орчуулга эсвэл шинэ татварын нэр томьёонд туслахыг хүсэж байна уу?"
-    },
-    "app.contact.intro": {
-        "message": "Та хэн бэ, хэрхэн хувь нэмрээ оруулахыг хүсэж байгаагаа бидэнд хэлнэ үү. Бид бүх зурвасыг уншина—одоогоос ямар нэгэн үүрэг хүлээх шаардлагагүй."
-    },
-    "app.contact.nameLabel": {
-        "message": "Нэр"
-    },
-    "app.contact.namePlaceholder": {
-        "message": "Таны нэр"
-    },
-    "app.contact.emailLabel": {
-        "message": "И-мэйл"
-    },
-    "app.contact.emailPlaceholder": {
-        "message": "ta@example.com"
-    },
-    "app.contact.helpLabel": {
-        "message": "Та яаж туслахыг хүсэж байна вэ"
-    },
-    "app.contact.helpPlaceholder": {
-        "message": "Жишээ нь: Португал хэл рүү орчуулж чадна, эсвэл манай бүс нутгийн нэр томьёоны тодорхойлолтыг судалж санал болгоно…"
-    },
-    "app.contact.submit": {
-        "message": "Зурвас илгээх"
-    },
-    "app.contact.sending": {
-        "message": "Илгээгдэж байна…"
-    },
-    "app.contact.validationEmailRequired": {
-        "message": "И-мэйл хаягаа оруулна уу."
-    },
-    "app.contact.validationEmailInvalid": {
-        "message": "Зөв и-мэйл хаяг оруулна уу."
-    },
-    "app.contact.validationNameRequired": {
-        "message": "Нэрээ оруулна уу."
-    },
-    "app.contact.validationHelpRequired": {
-        "message": "Хэрхэн туслахыгаа тайлбарлана уу."
-    },
-    "app.contact.errorServer": {
-        "message": "Алдаа гарлаа. Түр хүлээгээд дахин оролдоно уу."
-    },
-    "app.contact.errorNetwork": {
-        "message": "Серверт холбогдож чадсангүй. Холболтоо шалгаад дахин оролдоно уу."
-    },
-    "app.contact.successSent": {
-        "message": "Баярлалаа—танай зурвасыг хүлээн авлаа."
-    },
     "app.footer.project": {
         "message": "TaxDecoder Олон Хэлний Төсөл"
     }

@@ -65,60 +65,6 @@
     "app.trust.verifiedSecure": {
         "message": "Segurança Verificada"
     },
-    "app.contact.top-title": {
-        "message": "Participe"
-    },
-    "app.contact.headline": {
-        "message": "Quer ajudar com tradução ou novos termos fiscais?"
-    },
-    "app.contact.intro": {
-        "message": "Conte-nos quem você é e como gostaria de contribuir. Lemos todas as mensagens—sem compromisso por enquanto."
-    },
-    "app.contact.nameLabel": {
-        "message": "Nome"
-    },
-    "app.contact.namePlaceholder": {
-        "message": "Seu nome"
-    },
-    "app.contact.emailLabel": {
-        "message": "E-mail"
-    },
-    "app.contact.emailPlaceholder": {
-        "message": "voce@exemplo.com"
-    },
-    "app.contact.helpLabel": {
-        "message": "Como você gostaria de ajudar"
-    },
-    "app.contact.helpPlaceholder": {
-        "message": "Ex.: posso traduzir para o português, ou pesquisar e sugerir definições de termos da minha região…"
-    },
-    "app.contact.submit": {
-        "message": "Enviar mensagem"
-    },
-    "app.contact.sending": {
-        "message": "Enviando…"
-    },
-    "app.contact.validationEmailRequired": {
-        "message": "Digite seu e-mail."
-    },
-    "app.contact.validationEmailInvalid": {
-        "message": "Digite um endereço de e-mail válido."
-    },
-    "app.contact.validationNameRequired": {
-        "message": "Digite seu nome."
-    },
-    "app.contact.validationHelpRequired": {
-        "message": "Descreva como você gostaria de ajudar."
-    },
-    "app.contact.errorServer": {
-        "message": "Algo deu errado. Tente novamente em instantes."
-    },
-    "app.contact.errorNetwork": {
-        "message": "Não foi possível conectar ao servidor. Verifique sua conexão e tente novamente."
-    },
-    "app.contact.successSent": {
-        "message": "Obrigado—recebemos sua mensagem."
-    },
     "app.footer.project": {
         "message": "Projeto Multilíngue TaxDecoder"
     }

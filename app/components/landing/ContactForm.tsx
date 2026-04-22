@@ -12,10 +12,7 @@ function isValidEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
-/**
- * Contributor contact form; POSTs JSON to {@link CONTACT_API}.
- * Implement `app/api/contact/route.ts` when ready.
- */
+/** Contributor contact form; POSTs JSON to {@link CONTACT_API}. */
 const ContactForm = () => {
   const intl = useIntl();
   const [name, setName] = useState("");
