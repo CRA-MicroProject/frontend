@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CRA frontend
 
-## Getting Started
+Next.js App Router frontend for the CRA micro project: React 19, TypeScript, Tailwind CSS, and `react-intl` for localization.
 
-First, run the development server:
+## Prerequisites
+
+- **Node.js** — use an LTS release compatible with Next.js 16 (for example Node 20 or 22).
+
+## Environment
+
+Create a `.env` file in the project root (same folder as `package.json`). The contact form API needs:
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `BREVO_API_KEY` | Yes | Brevo API key for transactional email |
+| `ADMIN_EMAIL` | Yes | Address that receives contact submissions |
+| `BACKEND_URL` | Yes | Backend API URL for fetching terms and translations |
+| `BREVO_SENDER_EMAIL` | No | Verified sender in Brevo; defaults to `ADMIN_EMAIL` if omitted |
+
+Without these, the site may load, but submitting the contact form returns a server error.
+
+## Install dependencies
+
+From this directory:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+You can use `pnpm install` or `yarn` instead if you prefer; keep your lockfile strategy consistent for the team.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Development server at [http://localhost:3000](http://localhost:3000) |
+| `npm run build` | Production build |
+| `npm run start` | Run the production server (after `build`) |
+| `npm run lint` | ESLint |
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This app is a standard Next.js project and deploys cleanly on [Vercel](https://vercel.com).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Push the repo** to GitHub, GitLab, or Bitbucket (or import an existing repository).
+
+2. **Create a project** in the [Vercel dashboard](https://vercel.com/new): import the repository that contains this frontend.
+
+3. **Configure the project**
+   - **Framework preset:** Next.js (usually detected automatically).
+   - **Root directory:** If this repo is only the frontend, leave the default (`.`). If the frontend lives in a subfolder of a monorepo, set **Root Directory** to that folder (for example `frontend`).
+   - **Build & Output:** Defaults are fine — **Build Command** `next build`, **Install Command** `npm install` (or match your lockfile).
+
+4. **Environment variables** — In the project **Settings → Environment**, add the same variables as in [Environment](#environment) for **Production** (and **Preview** if you want previews to work end-to-end):
+
+   | Name | Notes |
+   |------|--------|
+   | `BREVO_API_KEY` | Required for contact email |
+   | `ADMIN_EMAIL` | Required |
+   | `BACKEND_URL` | Required; use your deployed backend URL |
+   | `BREVO_SENDER_EMAIL` | Optional |
+
+   Mark secrets as **Sensitive** in Vercel so they are not exposed to the client.
+
+5. **Deploy** — Trigger the first deployment. After it succeeds, Vercel assigns a production URL; custom domains can be added under **Settings → Domains**.
+
+`BACKEND_URL` must be reachable from Vercel’s servers (public HTTPS). If the backend blocks unknown origins, configure CORS for your Vercel domain.
+
+## Learn more
+
+- [Next.js documentation](https://nextjs.org/docs)
